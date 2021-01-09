@@ -11,6 +11,7 @@ const orm = {
     },
     // INSERT INTO burgers (burger_name,devoured) VALUES (?,?)
     insertOne: function(table,val,cb){
+        console.log("hello, ",val);
         const queryString = "INSERT INTO " + table + " (burger_name,devoured) VALUES (?,?)";
         connection.query(queryString,val,function(err,result){
             if (err) throw err;
