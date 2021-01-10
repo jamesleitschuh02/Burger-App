@@ -1,6 +1,17 @@
 // Import MySQL connection.
 const connection = require("../config/connection.js"); // ./connection.js?
 
+function getQuery(table,condition,devouredState){
+    if (devouredState === "1"){
+        const statement = "UPDATE " + table + " SET devoured = 0 WHERE id = " + condition;
+        return statement;
+    }
+    else{
+        const statement = "UPDATE " + table + " SET devoured = 1 WHERE id = " + condition;
+        return statement;
+    }
+}
+
 const orm = {
     selectAll: function(table, cb){
         const queryString = "SELECT * FROM " + table;
@@ -9,7 +20,7 @@ const orm = {
             cb(result);
         });
     },
-    // INSERT INTO burgers (burger_name,devoured) VALUES (?,?)
+
     insertOne: function(table,val,cb){
         console.log(val);
         const queryString = "INSERT INTO " + table + " (burger_name,devoured) VALUES (?,?)";
@@ -18,8 +29,8 @@ const orm = {
             cb(result);
         });
     },
-    updateOne: function(table,condition,cb){
-        const queryString = "UPDATE " + table + " SET devoured = 1 WHERE id = " + condition;
+    updateOne: function(table,condition,devouredState,cb){
+        const queryString = getQuery(table,condition,devouredState);
 
         connection.query(queryString,function(err,result){
             if (err) throw err;

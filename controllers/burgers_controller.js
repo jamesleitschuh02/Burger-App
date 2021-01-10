@@ -24,17 +24,15 @@ router.post("/api/burgers",function(req,res){
 });
 
 router.put("/api/burgers/:id",function(req,res){
-    console.log("we made it here");
-    burger.updateOne(req.params.id,function(result){
+    burger.updateOne(req.params.id,req.body.devoured,function(result){
         res.status(200).end();
-    })
+    });
 });
 
 router.delete("/api/burgers/:id",function(req,res) {
     burger.deleteOne(req.params.id,function(result){
         res.status(200).end();
-    }
-    );
+    });
 });
 
 module.exports = router;
