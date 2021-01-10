@@ -18,12 +18,18 @@ $(function(){
         );
     });
 
-    $(".change-devoured").on("click",function(event){
+    $(".devoure-btn").on("click",function(event){
         const id = $(this).data("id");
+        const newDevoured = $(this).data("bool");
+        
+        console.log("Id is " + id);
+        console.log("Devoured state is " + newDevoured);
+
+        const newDevouredState = { devoured: newDevoured};
         
         $.ajax("/api/burgers/"+id,{
             type: "PUT",
-            data: 0
+            data: newDevouredState
         }).then(
             function(){
                 console.log("Devoured state changed!");

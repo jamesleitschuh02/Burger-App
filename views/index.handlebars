@@ -1,25 +1,41 @@
 <h1>It's Burger Time!</h1>
 
-<h2>Burgers not eaten</h2>
-
-<ul>
-    {{#each burgers}}{{#if devoured}}
-        {{burger_name}}
-        <button class = "btn delete-btn" data-id="{{id}}" data-state="{{Devoured}}">
-          Delete
-        </button>
-    {{/if}}{{/each}}
-</ul>
-
-<h2>Burgers eaten</h2>
+<h2>Burgers Yet to be devoured</h2>
 
 <ul>
     {{#each burgers}}{{#unless devoured}}
         {{burger_name}}
-        <button class = "btn delete-btn" data-id="{{id}}" data-state="{{Devoured}}">
+        <br>
+
+        <button class = "btn devoure-btn" data-id="{{id}}" data-bool="{{devoured}}">
+          Devoure
+        </button>
+
+        <button class = "btn delete-btn" data-id="{{id}}">
           Delete
         </button>
+        <br><br>
+
     {{/unless}}{{/each}}
+</ul>
+
+<h2>Burgers Devoured</h2>
+
+<ul>
+    {{#each burgers}}{{#if devoured}}
+        {{burger_name}}
+        <br>
+
+        <button class = "btn devoure-btn" data-id="{{id}}" data-bool="{{devoured}}">
+          Un-Devoure
+        </button>
+
+        <button class = "btn delete-btn" data-id="{{id}}">
+          Delete
+        </button>
+        <br><br>
+
+    {{/if}}{{/each}}
 </ul>
 
 
